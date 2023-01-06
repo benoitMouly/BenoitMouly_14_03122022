@@ -6,8 +6,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function BasicSelect(props) {
-    console.log(props.className)
-  const [age, setAge] = React.useState('');
+  const [department, setDepartment] = React.useState('');
+
+  const {getSelect} = props
+
 
   let menuItem = [];
   if(props.className === 'department'){
@@ -16,29 +18,30 @@ export default function BasicSelect(props) {
     menuItem.push('Alabama', 'Alaska')
   }
   const handleChange = (event) => {
-    // console.log(menuItem)
-    setAge(event.target.value);
+    event.preventDefault()
+    setDepartment(event.target.value);
+    getSelect(event.target.value)
 
   };
 
   const clicked = (event) => {
-    console.log(props.className)
-    console.log(menuItem);
+    event.preventDefault()
   }
 
-  const listItems = menuItem.map((number) => 
-  <MenuItem value={number}>{number}</MenuItem>
+  const listItems = menuItem.map((elt) => 
+  <MenuItem key={elt} value={elt}>{elt}</MenuItem>
     )
+
 
   return (
     <Box sx={{ minWidth: 120 }} onClick={clicked}>
       <FormControl fullWidth >
-        <InputLabel id="demo-simple-select-label" >Age</InputLabel>
+        <InputLabel id="demo-simple-select-label" >{props.className}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          label="Age"
+          value={department}
+          label={props.className}
           onChange={handleChange} >
             {listItems}
 
