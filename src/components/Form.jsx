@@ -1,6 +1,7 @@
 import BasicModal  from './utils/Modal.jsx';
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 import { getInfos } from '../features/user/userSlice';
 
 import DatePickerCustom from './utils/DatePicker.jsx';
@@ -19,9 +20,15 @@ const FormNew = () => {
     const [zipCode, setZipCode] = useState('')
     const [department, setDepartment] = useState('')
 
+    const [open, setOpen] = useState(false);
+    const navigate = useNavigate()
 
-    const infos  = useSelector((state) => state.user)
-    console.log(infos)
+    const handleClose = () => {
+      setOpen(false);
+        navigate('/listing')
+    }
+
+
 
     const getDateBirth = (dateofbirth) => {
         setBirth(dateofbirth)
@@ -41,10 +48,6 @@ const FormNew = () => {
         setDepartment(department)
       }
 
-      const checker = () => {
-        document.querySelector('.basic-modal').style.display = 'block'
-      }
-
     const dispatch = useDispatch()
 
     const onCreate = e =>  {
@@ -53,16 +56,12 @@ const FormNew = () => {
             firstname, lastname, startdate, department, dateofbirth, street, city, state, zipCode
         }
         submitForm(postData)
-
       }
 
 
       const submitForm = (data) => {
         dispatch(getInfos(data))
-      }
-
-      const pushModal = () => {
-
+        setOpen(true)
       }
 
     return (
@@ -73,18 +72,16 @@ const FormNew = () => {
                 <p>Informations générales</p>
                 <label htmlFor="firstname">First Name : </label>
                 <input type="text" id="name" name="firstname" 
-                    size="10" onChange={(e) => setFirstname(e.target.value)} required></input>
+                    size="10" onChange={(e) => setFirstname(e.target.value)} ></input>
 
                 <label htmlFor="lastname">Last Name : </label>
-                <input type="text" id="name" name="lastname"  size="10"  onChange={(e) => setLastame(e.target.value)} required></input>
+                <input type="text" id="name" name="lastname"  size="10"  onChange={(e) => setLastame(e.target.value)} ></input>
                 <label htmlFor="dateofbirth">Date de naissance : </label>
                 <div className='pickerdateofbirth'>
-                    {/* <DatePickerCustom prop={setBirth} className="dateofbirth" /> */}
                     <DatePickerCustom getDate={getDateBirth} className="dateofbirth"/>
                 </div>
                 <label htmlFor="startdate">Date de début de contrat : </label>
                 <div className='pickerstartdate'>
-                    {/* <DatePickerCustom prop={setStart} className="startdate" /> */}
                     <DatePickerCustom getDate={getDateStart} className="startdate"/>
                 </div>
 
@@ -95,10 +92,10 @@ const FormNew = () => {
             <p> Adresse</p>
                 <label htmlFor="street">Street : </label>
                 <input type="text" id="street" name="street" 
-                size="10" onChange={(e) => setStreet(e.target.value)} required></input>
+                size="10" onChange={(e) => setStreet(e.target.value)} ></input>
         
                 <label htmlFor="city">City : </label>
-                <input type="text" id="city" name="city"  size="10" onChange={(e) => setCity(e.target.value)} required></input>
+                <input type="text" id="city" name="city"  size="10" onChange={(e) => setCity(e.target.value)} ></input>
 
                 <div className="form-elt">
                     <p>State</p>
@@ -108,7 +105,7 @@ const FormNew = () => {
 
 
                 <label htmlFor="zipcode">Zip code : </label>
-                <input type="text" id="zipcode" name="zipcode"  size="10" onChange={(e) => setZipCode(e.target.value)} required></input>
+                <input type="text" id="zipcode" name="zipcode"  size="10" onChange={(e) => setZipCode(e.target.value)} ></input>
                 
             </div>
 
@@ -123,7 +120,7 @@ const FormNew = () => {
         <div className="save-btn">
             <input type="submit"  className="save-button" value="Save"/>
             <div className="basic-modal">
-            <BasicModal />
+            <BasicModal open={open} onClose={handleClose}/>
             </div>
          
         </div>
