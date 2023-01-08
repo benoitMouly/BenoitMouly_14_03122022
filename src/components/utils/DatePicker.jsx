@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import './DatePicker.css'
 dayjs.extend(customParseFormat)
 
 const DatePickerCustom = (props) => {
@@ -32,19 +33,13 @@ const yearRef = useRef(null)
   let date = dayjs();
   let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   let currentDate = date.format('DD/MM/YYYY');
-
-  
-  // let showDatePicker = document.querySelector('#datepicker');
   let showDatePicker = datepicker.current
   let swipeDate;
   let currentMonth = date.format('MM')
   let currentYear = date.format('YYYY')
 
-
-
-
 /*
-Création de la table calendar 
+Create Table
 */
 const createTable = () => {
 
@@ -69,7 +64,7 @@ const createTable = () => {
 
 
 /*
-Hydrate déroulants selectMonth
+Hydrate scrollers selectMonth
 */
 
 const hydrateMonthScroller = () => {
@@ -89,7 +84,7 @@ selectMonth.appendChild(defaultMonthOption)
 }
 
 /*
-Hydrate déroulants selectYear
+Hydrate scrollers selectYear
 */
 const hydrateYearScroller = () => {
 let selectYear = yearRef.current
@@ -115,7 +110,7 @@ selectYear.appendChild(defaultYearOption)
 
 
 /*
-Toggle calendar appearance ; à mettre dans une fonction une fois la refacto React 
+Toggle calendar appearance
 */
 
 const toggleDateOpen = (e) => {
@@ -132,7 +127,7 @@ const toggleDateOpen = (e) => {
 
 
 /*
-CurrentDate dans le champ texte
+CurrentDate into input
 */
 
 
@@ -160,15 +155,11 @@ Playing with btn months
 const updateNextMonth = (e, b ) => {
   e.preventDefault()
   let currentdayjs = inputRef.current.value
-  // currentdayjs = currentdayjs.toString()
-  // let nextMonthTimeStamp = dayjs(currentdayjs, 'DD/MM/YYYY').toDate();
   let nextMonthTimeStamp = dayjs(currentdayjs, 'DD/MM/YYY').toDate()
   swipeDate = dayjs(nextMonthTimeStamp).add(1, 'month') 
   let year = dayjs(swipeDate).format('YYYY') // return string, we need int
   year = parseInt(year) + 100 // dayjs begins at 1900 
   yearRef.current.value = year
-  // let sanitizedMonth  = swipeDate.format('M').padStart(2, '0') // adding 0 when number < 10
-  // let sanitizedMonth = dayjs(swipeDate).format('M').padStart(2, '0')
   let sanitizedMonth = dayjs(swipeDate).format('MM') // return string, we need int
   monthRef.current.value = parseInt(sanitizedMonth)
   b = swipeDate.format('DD/' + sanitizedMonth + '/' + year) 
@@ -215,8 +206,6 @@ const changeMonth = (e, b) => {
 
     let sanitizedMonth = month.padStart(2, '0')
     b = swipeDate.format('DD/' + sanitizedMonth + '/' + year) 
-    // console.log(b)
-
     displayCurrentDate(b);
     switchDisplayDays(e, b);
 }
@@ -239,10 +228,6 @@ Event on days
 */
 
 const eventOnDays = (e, b) => {
-  // console.log(e)
-  // let currentDayDate = dayjs().get('D')
-  // console.log('CURRENT DAYS DATE')
-  // console.log(currentDayDate)
 let btnDayValueFill;
 let btnDays = tableref.current.querySelectorAll('.choosingDay');
 
@@ -250,18 +235,13 @@ for(let i = 0; i < btnDays.length; i++){
   
   // eslint-disable-next-line no-loop-func
   btnDays[i].addEventListener('click', function(e){
-    // btnDays[i].classList.toggle('selectedDay')
     e.preventDefault()
     let btnDayValue = btnDays[i].innerHTML
     let monthChoosed = monthRef.current.value
-    // console.log(monthChoosed)
     let sanitizedMonth  = monthChoosed.padStart(2, '0')
     let yearChoosed = yearRef.current.value
     btnDayValueFill = btnDayValue.padStart(2, '0'); 
     e = date.format(btnDayValueFill + '/' + sanitizedMonth + '/' + yearChoosed) 
-
-    
-
     toggleDateOpen(showDatePicker);
     displayCurrentDate(e)
 
@@ -277,11 +257,7 @@ Update current month index
 function updateMonth(date, elts){
   let previousTimeStamp = dayjs(date, 'DD/MM/YYYY').toDate();
   swipeDate = dayjs(previousTimeStamp)
-  // // console.log('SWWIIIPPPEE')
-  // // console.log(previousTimeStamp)
-
   let monthIndex = swipeDate.format('M')
- 
   for(let i = 0; i < elts.length; i++){
     if(elts[i].value === monthIndex){
       elts[i].setAttribute('selected', 'true')
@@ -316,24 +292,19 @@ const switchDisplayDays = (e, b) => {
 
   let lastMonthDate = [];
   let nextMonthDate = [];
-
-  // let previousMonthTimeStamp = dayjs(displayDateRef, 'DD/MM/YYYY').toDate();
   let previousMonthTimeStamp = dayjs(b, 'DD/MM/YYYY').toDate(); // b is date passed and works with everything because daysInMonth gives a date
   let previousMonthSanitize = dayjs(previousMonthTimeStamp).subtract(1, 'month').format('DD/MM/YYYY')// INDEX last day of last month
   let lastDayPreviousMonthNumber = dayjs(previousMonthSanitize, 'DD/MM/YYYY').endOf('month').format('DD') // INT
   let currentMonthTimeStamp = dayjs(b, 'DD/MM/YYYY').toDate();
   let firstDay = dayjs(currentMonthTimeStamp).startOf('month').format('d')
 
-  // // console.log(firstDay) // 4e jour de la semaine pour THURSDAY ça commence le SUNDAY /// DECEMBRE
   let firstDayNumber = dayjs(currentMonthTimeStamp).startOf('month').format('DD') // numéro de la date pas du jour
   let lastDayNumber = dayjs(currentMonthTimeStamp).endOf('month').format('DD')  // numéro de la date, pas numéru du jour
 
   // SI le mois commence par THURSDAY, alors le premier jour du mois doit commencer sur l'index de THURSDAY
   // On rempli les jours jusqu'au bout, si le dernier jour est SUNDAY, alors on doit terminer sur l'index de SUNDAY
   // Et on rempli l'index du MOIS PRECEDENT et du MOIS SUIVANT
-
     let dayz = tableref.current.querySelectorAll('.day-value');
-    
     let btns = tableref.current.querySelectorAll('.choosingDay')
 
     for(let i = 0; i < btns.length; i++){
@@ -353,10 +324,6 @@ const switchDisplayDays = (e, b) => {
               firstDayFound = i // Found the day of the first week from current month
             }
           }
-
-
-
-        
 
           btns.forEach((element, index) => {
 
