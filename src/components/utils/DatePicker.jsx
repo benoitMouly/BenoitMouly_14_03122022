@@ -11,6 +11,7 @@ const DatePickerCustom = (props) => {
     hydrateYearScroller();
     eventOnDays();
     switchDisplayDays();
+    displayCurrentDate(currentDate);
 }, [])
 
 

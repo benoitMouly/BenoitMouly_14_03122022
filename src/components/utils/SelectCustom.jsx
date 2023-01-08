@@ -5,45 +5,58 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import states from "./../../data/StateInfos.js"
+
+
+
 export default function BasicSelect(props) {
-  const [department, setDepartment] = React.useState('');
+  const [departmentState, setDepartmentState] = React.useState('');
 
   const {getSelect} = props
 
-
   let menuItem = [];
+  let objectItem = [];
+
   if(props.className === 'department'){
     menuItem.push('Sales', 'Marketing', 'Enginnering', 'Human ressources', 'Legal')
   } else{
-    menuItem.push('Alabama', 'Alaska')
+    states.map(state =>
+    objectItem.push({state}) 
+    )
   }
   const handleChange = (event) => {
     event.preventDefault()
-    setDepartment(event.target.value);
+    setDepartmentState(event.target.value);
     getSelect(event.target.value)
 
   };
 
-  const clicked = (event) => {
-    event.preventDefault()
-  }
+  let listToDisplay;
 
-  const listItems = menuItem.map((elt) => 
-  <MenuItem key={elt} value={elt}>{elt}</MenuItem>
-    )
+  if(props.className === 'department'){
+    listToDisplay = menuItem.map((elt) => 
+    <MenuItem key={elt} value={elt}>{elt}</MenuItem>
+      )
+    } else {
+      listToDisplay = objectItem.map((elt) => 
+    <MenuItem key={elt.state.abbreviation} value={elt.state.abbreviation}>{elt.state.name}</MenuItem>
+      )
+    }
 
 
   return (
-    <Box sx={{ minWidth: 120 }} >
+    <Box className={props.className} sx={{ minWidth: 120 }} >
       <FormControl fullWidth >
         <InputLabel id="demo-simple-select-label" >{props.className}</InputLabel>
         <Select
+        
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={department}
+          value={departmentState}
           label={props.className}
           onChange={handleChange} >
-            {listItems}
+  
+            {listToDisplay}
 
         </Select>
       </FormControl>
