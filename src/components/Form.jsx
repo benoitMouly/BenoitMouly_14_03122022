@@ -32,12 +32,12 @@ const FormNew = () => {
 
     const getDateBirth = (dateofbirth) => {
         setBirth(dateofbirth)
-        console.log(dateofbirth)
+        // console.log(dateofbirth)
       }
 
       const getDateStart = (startdate) => {
         setStart(startdate)
-        console.log(startdate)
+        // console.log(startdate)
       }
 
       const getState = (state) => {
@@ -65,22 +65,21 @@ const FormNew = () => {
       }
 
     return (
-        <div>
-        <div className='form'>
-            <form onSubmit={onCreate}>
+        <>
+            <form onSubmit={onCreate} className='form'>
             <div className='form-elt global-infos'>
-                <p>Informations générales</p>
-                <label htmlFor="firstname">First Name : </label>
+                <h4 className='title-form_part'>Informations générales</h4>
+                <label className="label-default" htmlFor="firstname">First Name : </label>
                 <input type="text" id="name" name="firstname" 
                     size="10" onChange={(e) => setFirstname(e.target.value)} ></input>
 
-                <label htmlFor="lastname">Last Name : </label>
+                <label className="label-default" htmlFor="lastname">Last Name : </label>
                 <input type="text" id="name" name="lastname"  size="10"  onChange={(e) => setLastame(e.target.value)} ></input>
-                <label htmlFor="dateofbirth">Date de naissance : </label>
+                <label className="label-default" htmlFor="dateofbirth">Date de naissance : </label>
                 <div className='pickerdateofbirth'>
                     <DatePickerCustom getDate={getDateBirth} className="dateofbirth"/>
                 </div>
-                <label htmlFor="startdate">Date de début de contrat : </label>
+                <label className="label-default" htmlFor="startdate">Date de début de contrat : </label>
                 <div className='pickerstartdate'>
                     <DatePickerCustom getDate={getDateStart} className="startdate"/>
                 </div>
@@ -89,44 +88,44 @@ const FormNew = () => {
 
             {/* adressesInfos */}
             <div className='form-elt adress-infos'>
-            <p> Adresse</p>
-                <label htmlFor="street">Street : </label>
+            <h4 className='title-form_part'> Adresse</h4>
+                <label className="label-default" htmlFor="street">Street : </label>
                 <input type="text" id="street" name="street" 
                 size="10" onChange={(e) => setStreet(e.target.value)} ></input>
         
-                <label htmlFor="city">City : </label>
+                <label className="label-default" htmlFor="city">City : </label>
                 <input type="text" id="city" name="city"  size="10" onChange={(e) => setCity(e.target.value)} ></input>
 
-                <div className="form-elt">
-                    <p>State</p>
+
+                    <label className="label-default">State :</label>
                     <BasicSelect  className="state" getSelect={getState} />
-                </div>
+                
                 
 
 
-                <label htmlFor="zipcode">Zip code : </label>
+                <label className="label-default" htmlFor="zipcode">Zip code : </label>
                 <input type="text" id="zipcode" name="zipcode"  size="10" onChange={(e) => setZipCode(e.target.value)} ></input>
                 
             </div>
 
             {/* department*/}
             <div className='form-elt department-infos'>
-                <p> Pôle</p>
-
+                <h4 className='title-form_part'> Pôle</h4>
+                <label className="label-default">Department :</label>
                 <BasicSelect  getSelect={getDepartment} className="department" />
         </div>
 
         {/* Send btn */}
         <div className="save-btn">
-            <input type="submit"  className="save-button" value="Save"/>
+            <input type="submit"  className="save-button" value="Add employee"/>
             <div className="basic-modal">
             <BasicModal open={open} onClose={handleClose}/>
             </div>
          
         </div>
         </form>
-        </div>
-    </div>
+
+    </>
     );
 
 

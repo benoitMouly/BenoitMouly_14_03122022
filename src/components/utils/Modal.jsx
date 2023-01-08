@@ -19,7 +19,6 @@ const style = {
 };
 
 export default function BasicModal(props) {
-  console.log(props)
   return (
     <div>
       {/* <Button onClick={handleOpen}>Open modal</Button> */}
@@ -33,10 +32,10 @@ export default function BasicModal(props) {
       >
         <Box sx={style} >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Information
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            Employé ajouté avec succès ! 
           </Typography>
         </Box>
       </Modal> }

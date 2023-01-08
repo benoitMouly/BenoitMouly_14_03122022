@@ -3,10 +3,10 @@ import FormNew from '../components/Form.jsx'
 
 const Home = () => {
     return (
-        <div>
-            <p>Create employee</p>
+        <>
+            <h3 className='title-page'>Create employee</h3>
             <FormNew/>
-        </div>
+        </>
     );
 };
 

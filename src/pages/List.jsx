@@ -3,10 +3,10 @@ import Table from '../components/utils/Table';
 
 const Listing = () => {
     return (
-        <div>
-            <p>Page listing</p>
+        <>
+            <h3 className='title-page'>Page listing</h3>
             <Table />
-        </div>
+        </>
     );
 };
 

@@ -37,7 +37,7 @@ const yearRef = useRef(null)
   let showDatePicker = datepicker.current
   let swipeDate;
   let currentMonth = date.format('MM')
-  let currentYear = date.format('Y')
+  let currentYear = date.format('YYYY')
 
 
 
@@ -136,15 +136,19 @@ CurrentDate dans le champ texte
 
 
 
-const homeDate = (e, b) => {
+const homeDate = (event, e, b) => {
+  event.preventDefault()
   swipeDate = dayjs().format('DD/MM/YYYY') 
-  
+
   b = dayjs().format('DD/MM/YYYY')
   displayCurrentDate(b)
   let monthsOption = tableref.current.querySelectorAll('.monthOption')
   let yearsOption = tableref.current.querySelectorAll('.yearOption');
+  monthRef.current.value = currentMonth
+  yearRef.current.value = currentYear
   updateMonth(swipeDate, monthsOption) // input select follows the current month selected
   updateYear(swipeDate, yearsOption);
+
   switchDisplayDays(e, b);
 }
 
@@ -153,7 +157,7 @@ Playing with btn months
 */
 
 const updateNextMonth = (e, b ) => {
-
+  e.preventDefault()
   let currentdayjs = inputRef.current.value
   // currentdayjs = currentdayjs.toString()
   // let nextMonthTimeStamp = dayjs(currentdayjs, 'DD/MM/YYYY').toDate();
@@ -167,8 +171,7 @@ const updateNextMonth = (e, b ) => {
   let sanitizedMonth = dayjs(swipeDate).format('MM') // return string, we need int
   monthRef.current.value = parseInt(sanitizedMonth)
   b = swipeDate.format('DD/' + sanitizedMonth + '/' + year) 
-  // // console.log('BBBBBBB')
-  // // console.log(b)
+
   let monthsOption = tableref.current.querySelectorAll('.monthOption')
   let yearsOption = tableref.current.querySelectorAll('.yearOption');
   
@@ -179,9 +182,9 @@ const updateNextMonth = (e, b ) => {
 }
 
 const updatePreviousMonth = (e, b) =>{
+  e.preventDefault()
   let currentdayjs = inputRef.current.value
-  // console.log('AVANT INITIALISATION')
-  // console.log(currentdayjs)
+
   let previousMonthTimeStamp = dayjs(currentdayjs, 'DD/MM/YYYY').toDate();
   swipeDate = dayjs(previousMonthTimeStamp).subtract(1, 'month')
   let year = dayjs(swipeDate).format('YYYY')
@@ -203,10 +206,12 @@ Event on déroulant
 */
 
 const changeMonth = (e, b) => {
+
     let previousTimeStamp = dayjs(b, 'DD/MM/YYYY').toDate(); // Converting string to date
     swipeDate = dayjs(previousTimeStamp)
     let year = yearRef.current.value
     let month = monthRef.current.value
+
     let sanitizedMonth = month.padStart(2, '0')
     b = swipeDate.format('DD/' + sanitizedMonth + '/' + year) 
     // console.log(b)
@@ -234,12 +239,17 @@ Event on days
 
 const eventOnDays = (e, b) => {
   // console.log(e)
+  // let currentDayDate = dayjs().get('D')
+  // console.log('CURRENT DAYS DATE')
+  // console.log(currentDayDate)
 let btnDayValueFill;
 let btnDays = tableref.current.querySelectorAll('.choosingDay');
 
 for(let i = 0; i < btnDays.length; i++){
+  
   // eslint-disable-next-line no-loop-func
   btnDays[i].addEventListener('click', function(e){
+    // btnDays[i].classList.toggle('selectedDay')
     e.preventDefault()
     let btnDayValue = btnDays[i].innerHTML
     let monthChoosed = monthRef.current.value
@@ -248,6 +258,8 @@ for(let i = 0; i < btnDays.length; i++){
     let yearChoosed = yearRef.current.value
     btnDayValueFill = btnDayValue.padStart(2, '0'); 
     e = date.format(btnDayValueFill + '/' + sanitizedMonth + '/' + yearChoosed) 
+
+    
 
     toggleDateOpen(showDatePicker);
     displayCurrentDate(e)
@@ -266,6 +278,7 @@ function updateMonth(date, elts){
   swipeDate = dayjs(previousTimeStamp)
   // // console.log('SWWIIIPPPEE')
   // // console.log(previousTimeStamp)
+
   let monthIndex = swipeDate.format('M')
  
   for(let i = 0; i < elts.length; i++){
@@ -299,8 +312,7 @@ function updateYear(date, elts){
 Update current display
 */
 const switchDisplayDays = (e, b) => {
-  // // console.log('RIGGERR')
-  // // console.log(b)
+
   let lastMonthDate = [];
   let nextMonthDate = [];
 
@@ -310,8 +322,7 @@ const switchDisplayDays = (e, b) => {
   let lastDayPreviousMonthNumber = dayjs(previousMonthSanitize, 'DD/MM/YYYY').endOf('month').format('DD') // INT
   let currentMonthTimeStamp = dayjs(b, 'DD/MM/YYYY').toDate();
   let firstDay = dayjs(currentMonthTimeStamp).startOf('month').format('d')
-  // console.log('FIRST DAY')
-  // console.log(b)
+
   // // console.log(firstDay) // 4e jour de la semaine pour THURSDAY ça commence le SUNDAY /// DECEMBRE
   let firstDayNumber = dayjs(currentMonthTimeStamp).startOf('month').format('DD') // numéro de la date pas du jour
   let lastDayNumber = dayjs(currentMonthTimeStamp).endOf('month').format('DD')  // numéro de la date, pas numéru du jour
@@ -405,13 +416,13 @@ const switchDisplayDays = (e, b) => {
                     <input typeof = "text" className='displayDate' ref={inputRef} defaultValue={currentDate}   onClick={(e) => toggleDateOpen(e.target.value, currentDate)}></input>
                     <div id="datepicker" ref={datepicker} className='dateHided'>
                             <div className="first-row btns-spec">
-                                    <button className='previousMonth' onClick={(e) => updatePreviousMonth()}> prev </button>
-                                    <button className='homeDay' onClick={(e) => homeDate(e.target.value, currentDate)}>home</button>
-                                    <select className='selectMonth'  ref={monthRef} defaultValue={currentMonth} onChange={(e) => changeMonth(e.target.value, currentDate)}>
+                                    <button className='previousMonth btnUtils' onClick={(e) => updatePreviousMonth(e)}> &lt; </button>
+                                    <button className='homeDay btnUtils' onClick={(e) => homeDate(e, e.target.value, currentDate)}><i className="fa fa-home"></i></button>
+                                    <select className='selectMonth btnUtils'  ref={monthRef} defaultValue={currentMonth} onChange={(e) => changeMonth(e.target.value, currentDate)}>
                                         
                                     </select>
-                                    <select className='selectYear'  ref={yearRef} defaultValue={currentYear} onChange={(e) => changeYear(e.target.value, currentDate)}></select>
-                                    <button className='nextMonth' onClick={(e) => updateNextMonth()} > next </button>
+                                    <select className='selectYear btnUtils'  ref={yearRef} defaultValue={currentYear} onChange={(e) => changeYear(e.target.value, currentDate)}></select>
+                                    <button className='nextMonth btnUtils' onClick={(e) => updateNextMonth(e)} > &gt; </button>
                             </div>
                             <div className="second-row">
                                 <table ref={tableref}>

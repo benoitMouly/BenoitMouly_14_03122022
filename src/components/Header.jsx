@@ -1,21 +1,29 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import logomini from '../assets/img/logomini.svg';
 
 const Header = () => {
     return (
-        <div>
+        <>
             <div className="header-container">
-                <div className="logo">
+            <NavLink to="/" className="main-nav" >
+                <div className="header-font">
+                
+                    <div className='header-font_img'>
+                  
                 <img
-          className="main-nav-logo-image"
+          
           src={logomini}
           alt="Wealth Health logo"
         />
-                </div>
-                <div className="header-font">Hrnet.</div>
-                <div className="menu-nav">View current Employees</div>
-            </div>
         </div>
+                    <h2>Hrnet.</h2>
+               
+                </div>
+                </NavLink>
+                <div className="menu-nav"><a href="/listing">View current Employees</a></div>
+            </div>
+        </>
     );
 };
 
