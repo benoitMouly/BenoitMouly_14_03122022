@@ -1,29 +1,36 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Quicksand', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Quicksand", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-#root{
+#root {
   display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-html, body, #root, #root>div {
-  height: 100%
+html,
+body,
+#root,
+#root > div {
+  height: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-/* HEADER */ 
-.header-container{
-  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.05)), url("https://deih43ym53wif.cloudfront.net/large_Panorama_Fruehling_Kapuzinerberg_Tourismus%20Salzburg%20Foto%20Breitegger%20G%C3%BCnter.jpg_db46f351c2.jpg");
+/* HEADER */
+.header-container {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0.05)
+    ),
+    url("https://deih43ym53wif.cloudfront.net/large_Panorama_Fruehling_Kapuzinerberg_Tourismus%20Salzburg%20Foto%20Breitegger%20G%C3%BCnter.jpg_db46f351c2.jpg");
   background-size: 100% auto;
   background-position: top;
   height: 100%;
@@ -31,82 +38,80 @@ code {
   align-items: center;
 }
 
-.header-font{
+.header-font {
   font-weight: 400;
   font-size: 2rem;
   color: #fff;
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   align-self: center;
   justify-self: center;
 }
 
-.menu-nav{
+.menu-nav {
   align-items: center;
   justify-self: center;
   color: #fff;
-  font-family: 'Quicksand', serif;
+  font-family: "Quicksand", serif;
   font-weight: 600;
 }
 
-
-.main-nav{
+.main-nav {
   text-decoration: none;
 }
+
 .header-container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  align-items: flex-end ;
-  }
-  
-  .header-font { 
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    padding-top: 1rem;
-  }
+  align-items: flex-end;
+}
 
-  .header-font_img{
-    height: 100%;
-    max-width: 70px;
-    padding: 6px;
-    background-color: #fff;
-    border-top-left-radius: 4px;
-  }
+.header-font {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding-top: 1rem;
+}
 
-  .header-font_img > img{
-    height: 100%;
-    width: 100%;
-  }
+.header-font_img {
+  height: 100%;
+  max-width: 70px;
+  padding: 6px;
+  background-color: #fff;
+  border-top-left-radius: 4px;
+}
 
-  .menu-nav > a{ 
-    font-weight: 500;
-    font-size: 1rem;
-    color: green;
-    font-family: 'Quicksand', serif;
-    align-self: center;
-    justify-self: center;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    padding-top: 1rem;
-    text-decoration: none;
-    background-color: white;
-    max-width: 278px;
-    width: 100%;
-    padding-left: 2rem;
-  }
+.header-font_img > img {
+  height: 100%;
+  width: 100%;
+}
 
+.menu-nav > a {
+  font-weight: 500;
+  font-size: 1rem;
+  color: green;
+  font-family: "Quicksand", serif;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding-top: 1rem;
+  text-decoration: none;
+  background-color: white;
+  max-width: 278px;
+  width: 100%;
+  padding-left: 2rem;
+}
 
-/* FORM */ 
-.form{
+/* FORM */
+.form {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
 }
-
 
 .header-font h2 {
   background-color: #fff;
@@ -119,15 +124,18 @@ code {
   opacity: 1;
 }
 
-/* TITLE PAGE */ 
+/* TITLE PAGE */
 .title-page {
   margin-left: 1rem;
 }
 
-
-/* FOOTER */ 
+/* FOOTER */
 footer {
-  background-image: linear-gradient(rgba(255, 255, 255), rgba(255, 255, 255, 52%)), url("https://deih43ym53wif.cloudfront.net/large_Panorama_Fruehling_Kapuzinerberg_Tourismus%20Salzburg%20Foto%20Breitegger%20G%C3%BCnter.jpg_db46f351c2.jpg");
+  background-image: linear-gradient(
+      rgba(255, 255, 255),
+      rgba(255, 255, 255, 52%)
+    ),
+    url("https://deih43ym53wif.cloudfront.net/large_Panorama_Fruehling_Kapuzinerberg_Tourismus%20Salzburg%20Foto%20Breitegger%20G%C3%BCnter.jpg_db46f351c2.jpg");
   background-size: 100% auto;
   background-position: center;
   height: 200px;
@@ -142,7 +150,7 @@ footer {
 }
 
 /* LABELS */
-.label-default{
+.label-default {
   color: green;
   margin-top: 1rem;
   margin-bottom: 0.7rem;
@@ -156,7 +164,8 @@ footer {
 }
 
 /* Selects */
-.state, .department{
+.state,
+.department {
   border-right: 2px solid transparent;
   border-left: 2px solid transparent;
   border-bottom: 2px solid transparent;

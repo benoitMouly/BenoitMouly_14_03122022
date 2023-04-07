@@ -1,19 +1,24 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import { useEffect } from 'react';
-import './Modal.css'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import "./style/Modal.css";
+
+/**
+ * Custom modal from MUI Elements
+ * @component react
+ * @param {Object} props, function returning value to the parent elt 
+ * @returns {JsxElement} 
+ */
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -21,24 +26,22 @@ const style = {
 export default function BasicModal(props) {
   return (
     <div>
-      {/* <Button onClick={handleOpen}>Open modal</Button> */}
- {props.open &&
-      <Modal
-        {...props}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-
-        
-      >
-        <Box sx={style} >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Information
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Employé ajouté avec succès ! 
-          </Typography>
-        </Box>
-      </Modal> }
+      {props.open && (
+        <Modal
+          {...props}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Information
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Employé ajouté avec succès !
+            </Typography>
+          </Box>
+        </Modal>
+      )}
     </div>
   );
 }

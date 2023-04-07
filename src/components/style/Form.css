@@ -1,0 +1,83 @@
+/* Global form style */
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.form-elt {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.save-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.dateHided {
+  display: none;
+}
+
+.title-form_part {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 20px;
+}
+
+.title-form_part::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  display: inline-block;
+  width: 83px;
+  margin-left: -11px;
+  border-bottom: green solid 1px;
+}
+
+/* CSS BUTTON */
+.save-button {
+  background-color: green;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 14px;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.save-button:hover,
+.save-button:focus {
+  background-color: #0db30d;
+}
+
+.btnUtils {
+  font-weight: bolder;
+  background: none;
+  border: 2px solid green;
+  color: green;
+}

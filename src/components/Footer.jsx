@@ -1,19 +1,17 @@
-import React from 'react';
+import React from "react";
 
-const divStyle = {
-    width: '100%',
-    height: '100px',
-    background: 'red',
-    textAlign: 'center'
-};
+/**
+ * Footer element
+ * @component react
+ * @returns {JsxElement} 
+ */
 
 const Footer = () => {
-    return (
-        
-        <footer>
-            <p className="footer-text">Copyright Wealth Health, 2023</p>
-        </footer>
-    );
+  return (
+    <footer>
+      <p className="footer-text">Copyright Wealth Health, 2023</p>
+    </footer>
+  );
 };
 
 export default Footer;

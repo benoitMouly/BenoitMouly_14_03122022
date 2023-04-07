@@ -1,9 +1,15 @@
 import React from 'react';
-import Table from '../components/utils/Table';
+
+/**
+ * If url path doesnt have any page attached, returning this page by default
+ * @component react
+ * @returns {JsxElement} 
+ */
+
 const NotFound = () => {
     return (
         <div>
-            <Table />
+            <p>Désolé cette page n'existe pas</p>
         </div>
     );
 };

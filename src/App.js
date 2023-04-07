@@ -14,31 +14,37 @@ import { store } from './app/store'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
-import Navigation from './components/Navigation';
+// import Navigation from './components/Navigation';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 
 let persistor = persistStore(store);
 
+/**
+ * Header of the website
+ * @component react
+ * @returns {JsxElement} 
+ */
 
 // Every data needs to get an access to redux
- // Then our app needs to be enrolled by a  " PROVIDER "
+// Then our app needs to be enrolled by a  " PROVIDER "
+// PersistGate allow us to stock our store into localStorage
+
  const App = () => {
   return (
     <>
     <Provider store={store}>
-       <PersistGate loading={null} persistor={persistor}>
-    <BrowserRouter>
-    <Header/>
-    <Routes>
-    
-      < Route path="/" element={<Home/>} />
-      < Route path="/listing" element={<Listing/>} />
-      < Route path="*" element={<NotFound/>} />
-    </Routes>
-    <Footer/>
-     </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Header/>
+          <Routes>
+            < Route path="/" element={<Home/>} />
+            < Route path="/listing" element={<Listing/>} />
+            < Route path="*" element={<NotFound/>} />
+          </Routes>
+          <Footer/>
+        </BrowserRouter>
      </PersistGate>
     </Provider>
     </>

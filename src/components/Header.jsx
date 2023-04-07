@@ -1,30 +1,31 @@
-import React from 'react';
+import React from "react";
 import { NavLink } from "react-router-dom";
-import logomini from '../assets/img/logomini.svg';
+import logomini from "../assets/img/logomini.svg";
+
+/**
+ * Header of the website
+ * @component react
+ * @returns {JsxElement} 
+ */
 
 const Header = () => {
-    return (
-        <>
-            <div className="header-container">
-            <NavLink to="/" className="main-nav" >
-                <div className="header-font">
-                
-                    <div className='header-font_img'>
-                  
-                <img
-          
-          src={logomini}
-          alt="Wealth Health logo"
-        />
-        </div>
-                    <h2>Hrnet.</h2>
-               
-                </div>
-                </NavLink>
-                <div className="menu-nav"><a href="/listing">View current Employees</a></div>
+  return (
+    <>
+      <div className="header-container">
+        <NavLink to="/" className="main-nav">
+          <div className="header-font">
+            <div className="header-font_img">
+              <img src={logomini} alt="Wealth Health logo" />
             </div>
-        </>
-    );
+            <h2>Hrnet.</h2>
+          </div>
+        </NavLink>
+        <div className="menu-nav">
+          <a href="/listing">View current Employees</a>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Header;
