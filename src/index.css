@@ -127,6 +127,7 @@ code {
 /* TITLE PAGE */
 .title-page {
   margin-left: 1rem;
+  padding-top: 2rem;
 }
 
 /* FOOTER */
@@ -161,6 +162,7 @@ footer {
 
 .App {
   height: unset !important;
+  padding: 2rem;
 }
 
 /* Selects */
