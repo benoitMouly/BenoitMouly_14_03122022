@@ -232,18 +232,15 @@ const FormNew = () => {
             size="10"
             onChange={(e) => getLastName(e.target.value)}
           ></input>
-          <label className="label-default" htmlFor="dateofbirth">
-            Date de naissance :{" "}
-          </label>
+          <div className="pickers" style={{display : 'flex', flexDirection: 'column', rowGap: '2rem', marginTop: '1rem'}}>
           <div className="pickerdateofbirth">
-            <DatePickerCustom getDate={getDateBirth} className="dateofbirth" />
+            <DatePickerCustom label='Date de naissance' getDate={getDateBirth} className="dateofbirth" />
           </div>
-          <label className="label-default" htmlFor="startdate">
-            Date de début de contrat :{" "}
-          </label>
           <div className="pickerstartdate">
-            <DatePickerCustom getDate={getDateStart} className="startdate" />
+            <DatePickerCustom label='Date de début de contrat' getDate={getDateStart} className="startdate" />
           </div>
+          </div>
+
         </div>
 
         {/* adressesInfos */}

@@ -12,6 +12,7 @@ dayjs.extend(customParseFormat);
  */
 
 const DatePickerCustom = (props) => {
+
   useEffect(() => {
     createTable();
     hydrateMonthScroller();
@@ -22,18 +23,29 @@ const DatePickerCustom = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  const { getDate } = props;
+
   const inputRef = useRef("");
   const tableref = useRef("");
   const datepicker = useRef("");
 
-  const displayCurrentDate = (b) => {
-    inputRef.current.value = b;
-    getDate(b);
-  };
+
+
+
 
   const monthRef = useRef(null);
   const yearRef = useRef(null);
+
+
+
+  const { getDate } = props;
+
+  const displayCurrentDate = (b) => {
+    inputRef.current.value = b;
+    if(!getDate){
+      return
+    }
+    getDate(b);
+  };
 
   let date = dayjs();
   let months = [
@@ -56,9 +68,9 @@ const DatePickerCustom = (props) => {
   let currentMonth = date.format("MM");
   let currentYear = date.format("YYYY");
 
-/*
-Create Table
-*/
+  /*
+  Create Table
+  */
   const createTable = () => {
     let table = tableref.current;
     let b = dayjs().format("DD/MM/YYYY");
@@ -79,9 +91,9 @@ Create Table
     switchDisplayDays(table, b);
   };
 
-/*
-Hydrate scrollers selectMonth
-*/
+  /*
+  Hydrate scrollers selectMonth
+  */
 
   const hydrateMonthScroller = () => {
     let selectMonth = monthRef.current;
@@ -99,9 +111,9 @@ Hydrate scrollers selectMonth
     }
   };
 
-/*
-Hydrate scrollers selectYear
-*/
+  /*
+  Hydrate scrollers selectYear
+  */
   const hydrateYearScroller = () => {
     let selectYear = yearRef.current;
     let defaultYearOption = document.createElement("option");
@@ -121,9 +133,9 @@ Hydrate scrollers selectYear
     }
   };
 
-/*
-Toggle calendar appearance
-*/
+  /*
+  Toggle calendar appearance
+  */
 
   const toggleDateOpen = (e) => {
     switchDisplayDays(e, date);
@@ -137,9 +149,9 @@ Toggle calendar appearance
     });
   };
 
-/*
-CurrentDate into input
-*/
+  /*
+  CurrentDate into input
+  */
 
   const homeDate = (event, e, b) => {
     event.preventDefault();
@@ -157,9 +169,9 @@ CurrentDate into input
     switchDisplayDays(e, b);
   };
 
-/*
-Playing with btn months
-*/
+  /*
+  Playing with btn months
+  */
 
   const updateNextMonth = (e, b) => {
     e.preventDefault();
@@ -201,9 +213,9 @@ Playing with btn months
     switchDisplayDays(e, b);
   };
 
-/*
-Event on scrollers 
-*/
+  /*
+  Event on scrollers 
+  */
 
   const changeMonth = (e, b) => {
     let previousTimeStamp = dayjs(b, "DD/MM/YYYY").toDate(); // Converting string to date
@@ -228,9 +240,9 @@ Event on scrollers
     switchDisplayDays(e, b);
   };
 
-/*
-Event on days
-*/
+  /*
+  Event on days
+  */
 
   const eventOnDays = (e, b) => {
     let btnDayValueFill;
@@ -254,9 +266,9 @@ Event on days
     }
   };
 
-/*
-Update current month index
-*/
+  /*
+  Update current month index
+  */
 
   function updateMonth(date, elts) {
     let previousTimeStamp = dayjs(date, "DD/MM/YYYY").toDate();
@@ -271,9 +283,9 @@ Update current month index
     }
   }
 
-/*
-Update current year index
-*/
+  /*
+  Update current year index
+  */
 
   function updateYear(date, elts) {
     let previousTimeStamp = dayjs(date, "DD/MM/YYYY").toDate();
@@ -289,9 +301,9 @@ Update current year index
     }
   }
 
-/*
-Update current display
-*/
+  /*
+  Update current display
+  */
   const switchDisplayDays = (e, b) => {
     let lastMonthDate = [];
     let nextMonthDate = [];
@@ -312,9 +324,9 @@ Update current display
       .endOf("month")
       .format("DD"); // number date of the day
 
-    // SI le mois commence par THURSDAY, alors le premier jour du mois doit commencer sur l'index de THURSDAY
-    // On rempli les jours jusqu'au bout, si le dernier jour est SUNDAY, alors on doit terminer sur l'index de SUNDAY
-    // Et on rempli l'index du MOIS PRECEDENT et du MOIS SUIVANT
+    // If month began at THURSDAY, then the first day of the month has to begin on the index of THURSDAY
+    // We fill days until then end, if the last one is SUNDAY, then we have to finish on the index of SUNDAY
+    // Then we fill the index of the previous and next month
     let dayz = tableref.current.querySelectorAll(".day-value");
     let btns = tableref.current.querySelectorAll(".choosingDay");
 
@@ -327,7 +339,7 @@ Update current display
     let firstDayFound = 0;
     let daytobegin;
 
-     // eslint-disable-next-line
+    // eslint-disable-next-line
     let daytoend;
 
     for (let i = 0; i < 7; i++) {
@@ -385,16 +397,27 @@ Update current display
     }
   };
 
+  if(!props.getDate){
+  console.error('Vous devez ajouter un état a votre composant')
+  }
+
   return (
     <>
+      
       <div className="inputpicker">
+
+        <label className='custom-date-picker-label' htmlFor={props.className}>{props.label ? props.label : null}</label>
         <input
           typeof="text"
           className="displayDate"
           ref={inputRef}
           defaultValue={currentDate}
           onClick={(e) => toggleDateOpen(e.target.value, currentDate)}
-        ></input>
+          name={props.className}
+          id={props.className}
+        ></input> <br/>
+                {!props.getDate && ('Vous devez ajouter un état "getDate" en props de votre composant' )}
+
         <div id="datepicker" ref={datepicker} className="dateHided">
           <div className="first-row btns-spec">
             <button
@@ -462,6 +485,8 @@ Update current display
           </div>
         </div>
       </div>
+      
+
     </>
   );
 };

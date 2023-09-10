@@ -1,4 +1,4 @@
-/* DatePicker Style */
+DatePicker Style
 
 #datepicker {
   border: 2px solid green;
@@ -37,4 +37,9 @@
 .selectedDay {
   background-color: green;
   color: #fff;
+}
+
+
+.custom-date-picker-label{
+  margin-right: 1rem;
 }

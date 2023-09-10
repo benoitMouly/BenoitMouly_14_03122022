@@ -18,6 +18,8 @@ export default function BasicSelect(props) {
 
   const { getSelect } = props;
 
+  console.log(props.className)
+
   let menuItem = [];
   let objectItem = [];
 
@@ -36,6 +38,7 @@ export default function BasicSelect(props) {
     event.preventDefault();
     setDepartmentState(event.target.value);
     getSelect(event.target.value);
+   
   };
 
   let listToDisplay;
@@ -57,10 +60,10 @@ export default function BasicSelect(props) {
   return (
     <Box className={props.className} sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{props.className}</InputLabel>
+        <InputLabel id={props.className}>{props.className}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          id={"demo-simple-select-" + props.className}
           value={departmentState}
           label={props.className}
           onChange={handleChange}
