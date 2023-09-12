@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { getInfos } from "../features/user/userSlice";
 import Validator from "./utils/Validator.js";
 
-import DatePickerCustom from "./utils/DatePicker.jsx";
+// import DatePickerCustom from "./utils/DatePicker.jsx";
+import DatePickerCustom from "datepicker-benoitmouly";
 import BasicSelect from "./utils/SelectCustom.jsx";
 
 import "../components/style/Form.css";
